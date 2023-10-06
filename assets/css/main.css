@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply font-jakarta bg-light-grey dark:bg-dark-grey dark:text-white;
+  }
+
+  h1 {
+    @apply text-2xl leading-[1.875rem] font-bold;
+  }
+
+  h2 {
+    @apply text-lg leading-[1.125rem] font-bold;
+  }
+
+  h3 {
+    @apply text-[0.9375rem] leading-[1.1875rem] font-bold;
+  }
+
+  h4 {
+    @apply text-xs leading-[0.9375rem] font-medium tracking-[0.15em] text-medium-grey;
+  }
+
+  .body-large {
+    @apply text-[0.8125rem] font-medium leading-[1.125rem];
+  }
+
+  .body-medium {
+    @apply text-xs font-bold leading-[0.9375rem];
+  }
+}
+
+.header-wrapper {
+  @apply bg-white text-black h-24 flex items-center;
+}
+
+.body-wrapper {
+  height: calc(100vh - 6rem);
+  @apply px-6 py-6 flex;
+}
+
+.all-boards {
+  @apply uppercase ml-8 mt-4;
+}
+
+.menu-list .q-item {
+  border-radius: 0 32px 32px 0;
+  @apply mr-6;
+}
+
+.q-item {
+  @apply pl-8;
+}
+
+.q-item__section--avatar {
+  @apply w-4 min-w-0 mr-4;
+}
+
+.active-item-menu {
+  @apply text-white bg-purple;
+}
+
+.modes-wrapper-outside {
+  @apply flex;
+}
+
+.modes-wrapper-inside {
+  @apply bg-light-grey py-[0.875rem] px-2 w-5/6 mx-auto rounded-md flex justify-center items-center;
+}
