@@ -4,7 +4,7 @@
 
 @layer base {
   body {
-    @apply font-jakarta bg-light-grey dark:bg-dark-grey dark:text-white;
+    @apply font-jakarta bg-light-grey dark:bg-very-dark-grey dark:text-white;
   }
 
   h1 {
@@ -33,7 +33,11 @@
 }
 
 .header-wrapper {
-  @apply bg-white text-black h-24 flex items-center;
+  @apply bg-white text-black dark:bg-dark-grey dark:text-white h-24 flex items-center;
+}
+
+.header-logo-wrapper {
+  @apply border-r-2 h-[96px] pr-8 pl-3 items-center dark:border-r-lines-dark;
 }
 
 .body-wrapper {
@@ -62,10 +66,27 @@
   @apply text-white bg-purple;
 }
 
+.drawer-menu {
+  height: calc(100vh - 8rem);
+  @apply flex flex-col justify-between;
+}
+
 .modes-wrapper-outside {
   @apply flex;
 }
 
 .modes-wrapper-inside {
-  @apply bg-light-grey py-[0.875rem] px-2 w-5/6 mx-auto rounded-md flex justify-center items-center;
+  @apply bg-light-grey dark:bg-very-dark-grey py-[0.875rem] px-2 w-5/6 mx-auto rounded-md flex justify-center items-center;
+}
+
+.hide-sidebar-wrapper {
+  @apply flex items-center py-5 px-8 text-medium-grey cursor-pointer;
+}
+
+.hide-sidebar-wrapper h3 {
+  @apply ml-4;
+}
+
+.show-sidebar-wrapper {
+  @apply bg-purple px-4 py-4 absolute bottom-14 left-0 rounded-r-full cursor-pointer;
 }

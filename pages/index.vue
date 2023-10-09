@@ -1,12 +1,9 @@
-<script setup>
-definePageMeta({
-  colorMode: "light",
-});
-</script>
+<script setup></script>
 
 <template>
   <div class="body-wrapper">
     <!-- <h2>Color mode: {{ $colorMode.value }}</h2> -->
+    {{ $colorMode.preference }}
     <div class="my-auto mx-auto text-center">
       <h2 class="text-medium-grey">
         This board is empty. Create a new column to get started.

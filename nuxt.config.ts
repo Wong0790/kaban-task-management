@@ -3,6 +3,7 @@ export default defineNuxtConfig({
   modules: [
     "nuxt-quasar-ui",
     "@nuxtjs/color-mode",
+    "@pinia/nuxt",
     "@nuxtjs/tailwindcss",
     [
       "@nuxtjs/google-fonts",
@@ -13,8 +14,13 @@ export default defineNuxtConfig({
       },
     ],
   ],
+  pinia: {
+    autoImports: ["defineStore", ["defineStore", "definePiniaStore"]],
+  },
   colorMode: {
     classSuffix: "",
+    preference: "light",
+    fallback: "dark",
   },
   quasar: {
     config: {
