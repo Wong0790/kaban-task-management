@@ -36,8 +36,20 @@
   @apply bg-white text-black dark:bg-dark-grey dark:text-white h-24 flex items-center;
 }
 
+.header-wrapper h1 {
+  @apply hidden sm:block;
+}
+
+.layout-menu {
+  @apply block sm:hidden;
+}
+
+.platform-btn-header {
+  @apply text-lg leading-[1.125rem] font-bold text-black dark:text-white;
+}
+
 .header-logo-wrapper {
-  @apply border-r-2 h-[96px] pr-8 pl-3 items-center dark:border-r-lines-dark;
+  @apply w-10 h-[96px] px-1 items-center  sm:w-fit sm:pr-8 sm:pl-3 sm:border-r-2 sm:dark:border-r-lines-dark;
 }
 
 .body-wrapper {
@@ -68,7 +80,14 @@
 
 .drawer-menu {
   height: calc(100vh - 8rem);
-  @apply flex flex-col justify-between;
+  @media only screen and (max-width: 640px) {
+    height: fit-content;
+  }
+  @apply flex flex-col sm:justify-between;
+}
+
+.menu-wrapper {
+  @apply dark:bg-dark-grey rounded-xl pb-4;
 }
 
 .modes-wrapper-outside {
@@ -80,7 +99,7 @@
 }
 
 .hide-sidebar-wrapper {
-  @apply flex items-center py-5 px-8 text-medium-grey cursor-pointer;
+  @apply hidden sm:flex items-center py-5 px-8 text-medium-grey cursor-pointer;
 }
 
 .hide-sidebar-wrapper h3 {
@@ -88,5 +107,5 @@
 }
 
 .show-sidebar-wrapper {
-  @apply bg-purple px-4 py-4 absolute bottom-14 left-0 rounded-r-full cursor-pointer;
+  @apply bg-purple px-4 py-4 sm:block sm:absolute sm:bottom-14 sm:left-0 rounded-r-full cursor-pointer hidden;
 }
