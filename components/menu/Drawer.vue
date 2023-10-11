@@ -24,7 +24,7 @@ const open = ref(false);
         class="menu-wrapper"
       >
         <div class="row no-wrap rounded-2xl">
-          <BaseLayoutDrawer />
+          <LayoutDrawer />
         </div>
       </q-menu>
     </q-btn>

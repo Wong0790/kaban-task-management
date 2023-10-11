@@ -56,7 +56,7 @@ const toggleLeftDrawer = () => {
           ></component>
         </q-item-section>
       </q-item>
-      <BaseLayoutDrawer @toggleLeftDrawer="toggleLeftDrawer" />
+      <LayoutDrawer @toggleLeftDrawer="toggleLeftDrawer" />
     </q-drawer>
     <div class="show-sidebar-wrapper" @click="toggleLeftDrawer">
       <IconShowSidebar />

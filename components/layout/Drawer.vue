@@ -4,45 +4,38 @@ import { useAppStore } from "@/stores/app";
 defineEmits(["toggleLeftDrawer"]);
 
 const store = useAppStore();
-const menuItems = [
-  {
-    id: 1,
-    active: false,
-    primary: false,
-    title: "Platform Launch",
-  },
-  {
-    id: 2,
-    active: true,
-    primary: false,
-    title: "Marketing Plan",
-  },
-  {
-    id: 3,
-    active: false,
-    primary: false,
-    title: "Roadmap",
-  },
-  {
-    id: 4,
-    active: false,
-    primary: true,
-    title: "+ Create New Board",
-  },
-];
+const menuItems = ref(store.boards);
+
+const allBoards = computed(() => store.boards.length - 1);
+
+const onClick = (id: number) => {
+  const index = menuItems.value.findIndex((x) => x.id === id);
+  switch (id) {
+    case 0:
+      store.newBoard = true;
+      break;
+
+    default:
+      const activeIndex = menuItems.value.findIndex((x) => x.active);
+      menuItems.value[activeIndex].active = false;
+      menuItems.value[index].active = true;
+      break;
+  }
+};
 </script>
 
 <template>
   <div class="drawer-menu">
     <div>
-      <h4 class="all-boards">All boards (3)</h4>
+      <h4 class="all-boards">All boards ({{ allBoards }})</h4>
       <q-list padding class="menu-list">
-        <BaseLayoutMenuItem
+        <LayoutDrawerItem
           v-for="item in menuItems"
           :key="item.id"
+          :id="item.id"
           :active="item.active"
-          :primary="item.primary"
           :title="item.title"
+          @onClickItem="onClick"
         />
       </q-list>
     </div>

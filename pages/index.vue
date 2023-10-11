@@ -11,5 +11,6 @@
         + Add New Column
       </q-btn>
     </div>
+    <DialogAddNewBoard />
   </div>
 </template>
