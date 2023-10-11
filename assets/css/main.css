@@ -109,3 +109,7 @@
 .show-sidebar-wrapper {
   @apply bg-purple px-4 py-4 sm:block sm:absolute sm:bottom-14 sm:left-0 rounded-r-full cursor-pointer hidden;
 }
+
+.menu-wrapper-item {
+  @apply pl-4 text-medium-grey;
+}

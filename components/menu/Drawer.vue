@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-const mobileData = ref(true);
-const bluetooth = ref(true);
 const open = ref(false);
 </script>
 

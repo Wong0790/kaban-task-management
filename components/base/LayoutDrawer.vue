@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import { useAppStore } from "@/stores/app";
-import { IconLogoDark, IconLogoLight } from "#components";
 
 defineEmits(["toggleLeftDrawer"]);
 

@@ -26,7 +26,7 @@ const toggleLeftDrawer = () => {
 
         <q-toolbar-title>
           <h1>Platform Launch</h1>
-          <BaseLayoutMenu />
+          <MenuDrawer />
         </q-toolbar-title>
         <q-btn
           color="primary"
@@ -38,9 +38,7 @@ const toggleLeftDrawer = () => {
           <span v-if="$q.screen.width > 640">+ Add New Task</span>
           <IconAddTask v-else />
         </q-btn>
-        <q-btn flat round dense class="q-mx-sm">
-          <IconMenuOptions />
-        </q-btn>
+        <MenuBoardOptions />
       </q-toolbar>
     </q-header>
 
