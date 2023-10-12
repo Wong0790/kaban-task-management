@@ -25,7 +25,7 @@ const toggleLeftDrawer = () => {
         </div>
 
         <q-toolbar-title>
-          <h1>Platform Launch</h1>
+          <h1>{{ store.activeMenu?.title }}</h1>
           <MenuDrawer />
         </q-toolbar-title>
         <q-btn

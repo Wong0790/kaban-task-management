@@ -6,21 +6,22 @@ defineEmits(["toggleLeftDrawer"]);
 const store = useAppStore();
 const menuItems = ref(store.boards);
 
-const allBoards = computed(() => store.boards.length - 1);
+const allBoards = computed(() => store.boards.length);
 
 const onClick = (id: number) => {
   const index = menuItems.value.findIndex((x) => x.id === id);
-  switch (id) {
-    case 0:
-      store.newBoard = true;
-      break;
-
-    default:
-      const activeIndex = menuItems.value.findIndex((x) => x.active);
-      menuItems.value[activeIndex].active = false;
-      menuItems.value[index].active = true;
-      break;
+  const activeIndex = menuItems.value.findIndex((x) => x.active);
+  if (activeIndex !== -1) {
+    menuItems.value[activeIndex].active = false;
   }
+  menuItems.value[index].active = true;
+};
+
+const createNewBoard = () => {
+  store.$patch({
+    boardDialog: true,
+    editBoardDialog: false,
+  });
 };
 </script>
 
@@ -37,6 +38,18 @@ const onClick = (id: number) => {
           :title="item.title"
           @onClickItem="onClick"
         />
+        <q-item
+          clickable
+          v-ripple
+          class="text-primary"
+          active-class="active-item-menu"
+          @click="createNewBoard"
+        >
+          <q-item-section avatar>
+            <IconBoard primary />
+          </q-item-section>
+          <q-item-section><h3>+ Create New Board</h3></q-item-section>
+        </q-item>
       </q-list>
     </div>
     <div>

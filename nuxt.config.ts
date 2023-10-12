@@ -23,6 +23,7 @@ export default defineNuxtConfig({
     fallback: "dark",
   },
   quasar: {
+    plugins: ["Notify"],
     config: {
       brand: {
         primary: "#635fc7",

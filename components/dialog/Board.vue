@@ -1,14 +1,22 @@
 <script lang="ts" setup>
 import { Board, Column } from "@/types/app";
 import { useAppStore } from "@/stores/app";
+import { useVuelidate } from "@vuelidate/core";
+import { required } from "@vuelidate/validators";
 
 const store = useAppStore();
 const form = ref<Board>({
-  id: store.boards.length + 1,
+  id: undefined,
   active: false,
   title: "",
   columns: [{ id: 0, name: "" }],
 });
+
+const rules = {
+  title: { required },
+};
+
+const v$ = useVuelidate(rules, form);
 
 const addColumn = () => {
   form.value.columns.push({
@@ -26,24 +34,40 @@ const removeColumn = (id: number) => {
   form.value.columns = form.value.columns.filter((x: Column) => x.id !== id);
 };
 
-const onSubmit = () => {
-  store.addBoard({ ...form.value });
-  store.newBoard = false;
-  onReset();
+const onSubmit = async () => {
+  if (await v$.value.$validate()) {
+    if (form.value.id === undefined) {
+      store.addBoard({ ...form.value });
+    } else {
+      store.updateBoard({ ...form.value });
+    }
+    store.boardDialog = false;
+    onReset();
+  }
 };
 
 const onReset = () => {
+  v$.value.$reset();
   form.value.id = undefined;
   form.value.title = "";
   form.value.columns = [{ id: 0, name: "" }];
 };
+
+onUpdated(() => {
+  if (store.editBoardDialog && store.activeMenu) {
+    form.value = { ...store.activeMenu };
+    store.editBoardDialog = false;
+  } else if (!store.editBoardDialog) {
+    onReset();
+  }
+});
 </script>
 
 <template>
-  <q-dialog v-model="store.newBoard">
+  <q-dialog v-model="store.boardDialog">
     <q-card class="dialog-card">
       <q-card-section>
-        <h2>Add New Board</h2>
+        <h2>{{ form.id === undefined ? "Add New Board" : "Edit Board" }}</h2>
       </q-card-section>
 
       <q-card-section class="mt-6">
@@ -54,8 +78,14 @@ const onReset = () => {
               outlined
               dense
               v-model="form.title"
+              :error="v$.title.$error"
+              no-error-icon
+              hide-bottom-space
               placeholder="e.g. Web Design"
+              error-message="Field required"
               :dark="store.colorMode.preference === 'dark'"
+              @input="v$.title.$touch"
+              @blur="v$.title.$touch"
             />
           </div>
 
@@ -81,7 +111,9 @@ const onReset = () => {
             />
             <q-btn
               unelevated
-              label="Create New Board"
+              :label="
+                form.id === undefined ? 'Create New Board' : 'Save Changes'
+              "
               type="submit"
               color="primary"
               no-caps

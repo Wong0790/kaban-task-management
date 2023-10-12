@@ -7,10 +7,7 @@ const props = defineProps({
   title: String,
 });
 
-const isPrimary = computed(() => props.id === 0);
-
 const onClick = () => {
-  console.log("id", props.id);
   emit("onClickItem", props.id);
 };
 </script>
@@ -20,12 +17,12 @@ const onClick = () => {
     :active="active"
     clickable
     v-ripple
-    :class="isPrimary ? 'text-primary' : 'text-medium-grey'"
+    class="text-medium-grey"
     active-class="active-item-menu"
     @click="onClick"
   >
     <q-item-section avatar>
-      <IconBoard :active="active" :primary="isPrimary" />
+      <IconBoard :active="active" />
     </q-item-section>
     <q-item-section
       ><h3>{{ title }}</h3></q-item-section
