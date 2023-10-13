@@ -131,3 +131,25 @@
   color: #635fc7;
   @apply dark:bg-white;
 }
+
+.column-card {
+  @apply flex flex-col w-[17.5rem] h-fit bg-transparent shadow-none gap-5;
+}
+
+.add-new-column-card {
+  height: calc(100vh - 10rem);
+  display: flex;
+  background: linear-gradient(
+    180deg,
+    #e9effa 0%,
+    rgba(233, 239, 250, 0.5) 100%
+  );
+}
+
+.new-column-card-text {
+  @apply text-medium-grey text-2xl leading-[1.875rem] font-bold my-auto mx-auto cursor-pointer;
+}
+
+.column-task-card {
+  @apply w-full bg-white rounded-lg dark:bg-dark-grey;
+}
