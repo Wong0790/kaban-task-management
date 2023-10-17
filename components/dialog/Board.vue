@@ -1,15 +1,18 @@
 <script lang="ts" setup>
-import { Board, Column } from "@/types/app";
+import { Board, Subchild } from "@/types/app";
 import { useAppStore } from "@/stores/app";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
 
 const store = useAppStore();
+const boardRef = ref<HTMLInputElement | null>();
+const { focused } = useFocus(boardRef, { initialValue: true });
 const form = ref<Board>({
   id: undefined,
   active: false,
   title: "",
-  columns: [{ id: 0, name: "" }],
+  columns: [],
+  tasks: [],
 });
 
 const rules = {
@@ -26,12 +29,12 @@ const addColumn = () => {
 };
 
 const updateColumn = (id: number, column: string) => {
-  const index = form.value.columns.findIndex((x: Column) => x.id === id);
+  const index = form.value.columns.findIndex((x: Subchild) => x.id === id);
   form.value.columns[index].name = column;
 };
 
 const removeColumn = (id: number) => {
-  form.value.columns = form.value.columns.filter((x: Column) => x.id !== id);
+  form.value.columns = form.value.columns.filter((x: Subchild) => x.id !== id);
 };
 
 const onSubmit = async () => {
@@ -49,8 +52,10 @@ const onSubmit = async () => {
 const onReset = () => {
   v$.value.$reset();
   form.value.id = undefined;
+  form.value.active = false;
   form.value.title = "";
-  form.value.columns = [{ id: 0, name: "" }];
+  form.value.columns = [];
+  form.value.tasks = [];
 };
 
 onUpdated(() => {
@@ -86,15 +91,16 @@ onUpdated(() => {
               :dark="store.colorMode.preference === 'dark'"
               @input="v$.title.$touch"
               @blur="v$.title.$touch"
+              ref="boardRef"
             />
           </div>
 
           <div class="body-medium text-medium-grey">
             <div class="mb-2">Columns</div>
-            <BaseColumn
+            <BaseSubchild
               v-for="col in form.columns"
               :key="col.id"
-              :column="col"
+              :child="col"
               @updateColumn="updateColumn"
               @removeColumn="removeColumn"
             />

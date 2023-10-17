@@ -1,4 +1,5 @@
-import { Board } from "@/types/app";
+import { LazyQSlideItem } from "#build/components";
+import { Board, Task } from "@/types/app";
 
 export const useAppStore = defineStore("app", () => {
   const colorMode = useColorMode();
@@ -6,6 +7,9 @@ export const useAppStore = defineStore("app", () => {
 
   const boardDialog = ref<boolean>(false);
   const editBoardDialog = ref<boolean>(false);
+
+  const taskDialog = ref<boolean>(false);
+  const editTaskDialog = ref<boolean>(false);
 
   const boards = ref<Board[]>([]);
 
@@ -25,6 +29,7 @@ export const useAppStore = defineStore("app", () => {
 
   function updateBoard(item: Board) {
     const index = boards.value.findIndex((board) => board.id === item.id);
+    item.columns = item.columns.filter((column) => column.name !== "");
     boards.value[index] = item;
   }
 
@@ -35,16 +40,29 @@ export const useAppStore = defineStore("app", () => {
     boards.value.splice(index, 1);
   }
 
+  function addTask(item: Task) {
+    const index = boards.value.findIndex(
+      (x: Board) => x.id === activeMenu.value?.id
+    );
+    if (index !== -1) {
+      item.id = boards.value[index].tasks.length + 1;
+      boards.value[index].tasks.push(item);
+    }
+  }
+
   return {
     colorMode,
     theme,
     boardDialog,
     editBoardDialog,
+    taskDialog,
+    editTaskDialog,
     boards,
     activeMenu,
     onClick,
     addBoard,
     updateBoard,
     removeBoard,
+    addTask,
   };
 });

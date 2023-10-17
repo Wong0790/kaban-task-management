@@ -32,8 +32,10 @@ const toggleLeftDrawer = () => {
           color="primary"
           rounded
           no-caps
-          @click="toggleLeftDrawer"
-          disabled
+          @click="store.taskDialog = true"
+          :disabled="
+            store.activeMenu === undefined || !store.activeMenu.columns.length
+          "
         >
           <span v-if="$q.screen.width > 640">+ Add New Task</span>
           <IconAddTask v-else />

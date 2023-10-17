@@ -5,16 +5,16 @@ import { useAppStore } from "@/stores/app";
 defineEmits(["updateColumn", "removeColumn"]);
 
 const props = defineProps<{
-  column: Subchild;
+  child: Subchild;
 }>();
 
 const store = useAppStore();
-const col = ref("");
-const columnRef = ref<HTMLInputElement | null>(null);
+const subchild = ref("");
+const subchildRef = ref<HTMLInputElement | null>(null);
 
 onMounted(() => {
-  col.value = props.column.name;
-  columnRef.value?.focus();
+  subchild.value = props.child.name;
+  subchildRef.value?.focus();
 });
 </script>
 
@@ -24,13 +24,12 @@ onMounted(() => {
       outlined
       dense
       :dark="store.colorMode.preference === 'dark'"
-      v-model="col"
-      placeholder="e.g. Todo"
+      v-model="subchild"
       class="w-10/12 sm:w-11/12"
-      @blur="$emit('updateColumn', column.id, col)"
+      @blur="$emit('updateColumn', child.id, subchild)"
       ref="columnRef"
     />
-    <q-btn flat round dense @click="$emit('removeColumn', column.id)">
+    <q-btn flat round dense @click="$emit('removeColumn', child.id)">
       <IconCross />
     </q-btn>
   </div>

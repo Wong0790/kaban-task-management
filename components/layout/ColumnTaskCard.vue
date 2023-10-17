@@ -1,4 +1,10 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+defineProps({
+  title: String,
+  subtasks: { default: 0, type: Number },
+  completed: { default: 0, type: Number },
+});
+</script>
 
 <template>
   <q-card
@@ -9,8 +15,10 @@
     "
   >
     <q-card-section>
-      <h3>Build UI for onboarding flow</h3>
-      <div class="body-medium mt-2 text-medium-grey">0 of 3 substasks</div>
+      <h3>{{ title }}</h3>
+      <div class="body-medium mt-2 text-medium-grey">
+        {{ completed }} of {{ subtasks }} substasks
+      </div>
     </q-card-section>
   </q-card>
 </template>

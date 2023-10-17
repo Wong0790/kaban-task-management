@@ -18,5 +18,6 @@ const store = useAppStore();
       <LayoutNotEmptyBoard />
     </q-scroll-area>
     <DialogBoard />
+    <DialogTask />
   </div>
 </template>

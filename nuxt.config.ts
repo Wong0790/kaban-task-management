@@ -4,6 +4,7 @@ export default defineNuxtConfig({
     "nuxt-quasar-ui",
     "@nuxtjs/color-mode",
     "@pinia/nuxt",
+    "@vueuse/nuxt",
     "@nuxtjs/tailwindcss",
     [
       "@nuxtjs/google-fonts",
