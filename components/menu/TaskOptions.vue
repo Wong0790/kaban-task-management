@@ -3,15 +3,15 @@ import { useAppStore } from "@/stores/app";
 
 const store = useAppStore();
 
-const disable = computed<boolean>(() => store.activeMenu === undefined);
-
 const onClick = () => {
-  store.editBoardDialog = true;
-  store.boardDialog = true;
+  store.viewTaskDialog = false;
+  store.editTaskDialog = true;
+  store.taskDialog = true;
 };
 
 const onDelete = () => {
-  store.deleteBoard = true;
+  store.viewTaskDialog = false;
+  store.deleteTask = true;
 };
 </script>
 
@@ -23,20 +23,18 @@ const onDelete = () => {
         <q-item
           clickable
           v-close-popup
-          :disable="disable"
           class="menu-wrapper-item body-large"
           @click="onClick"
         >
-          <q-item-section>Edit Board</q-item-section>
+          <q-item-section>Edit Task</q-item-section>
         </q-item>
         <q-item
           clickable
           v-close-popup
-          :disable="disable"
           class="menu-wrapper-item body-large text-negative"
           @click="onDelete"
         >
-          <q-item-section>Delete Board</q-item-section>
+          <q-item-section>Delete Task</q-item-section>
         </q-item>
       </q-list>
     </q-menu>

@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { Subchild } from "@/types/app";
+import { Subtask, Column } from "@/types/app";
 import { useAppStore } from "@/stores/app";
 
-defineEmits(["updateColumn", "removeColumn"]);
+defineEmits(["updateChild", "removeChild"]);
 
 const props = defineProps<{
-  child: Subchild;
+  child: Subtask | Column;
 }>();
 
 const store = useAppStore();
@@ -26,10 +26,10 @@ onMounted(() => {
       :dark="store.colorMode.preference === 'dark'"
       v-model="subchild"
       class="w-10/12 sm:w-11/12"
-      @blur="$emit('updateColumn', child.id, subchild)"
-      ref="columnRef"
+      @blur="$emit('updateChild', child.id, subchild)"
+      ref="subchildRef"
     />
-    <q-btn flat round dense @click="$emit('removeColumn', child.id)">
+    <q-btn flat round dense @click="$emit('removeChild', child.id)">
       <IconCross />
     </q-btn>
   </div>

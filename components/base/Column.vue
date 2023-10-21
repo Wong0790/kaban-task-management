@@ -1,11 +1,11 @@
 <script lang="ts" setup>
-import { Subchild } from "@/types/app";
+import { Column } from "@/types/app";
 import { useAppStore } from "@/stores/app";
 
 defineEmits(["updateColumn", "removeColumn"]);
 
 const props = defineProps<{
-  column: Subchild;
+  column: Column;
 }>();
 
 const store = useAppStore();

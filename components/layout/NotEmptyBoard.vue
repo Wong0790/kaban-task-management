@@ -7,6 +7,11 @@ const store = useAppStore();
 const totalTasks = (col?: number) => {
   return store.activeMenu?.tasks.filter((x: Task) => x.columnId === col).length;
 };
+
+const openTask = (task: Task) => {
+  store.selectedTask = task;
+  store.viewTaskDialog = true;
+};
 </script>
 
 <template>
@@ -22,9 +27,8 @@ const totalTasks = (col?: number) => {
 
       <LayoutColumnTaskCard
         v-for="task in store.activeMenu?.tasks.filter((x: Task) => x.columnId === column.id)"
-        :title="task.title"
-        :subtasks="task.subtasks.length"
-        :completed="task.subtasks.length"
+        :task="task"
+        @openTask="openTask(task)"
       />
     </q-card>
     <BaseAddNewColumn />

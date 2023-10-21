@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Board, Subchild } from "@/types/app";
+import { Board, Column } from "@/types/app";
 import { useAppStore } from "@/stores/app";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
@@ -29,12 +29,12 @@ const addColumn = () => {
 };
 
 const updateColumn = (id: number, column: string) => {
-  const index = form.value.columns.findIndex((x: Subchild) => x.id === id);
+  const index = form.value.columns.findIndex((x: Column) => x.id === id);
   form.value.columns[index].name = column;
 };
 
 const removeColumn = (id: number) => {
-  form.value.columns = form.value.columns.filter((x: Subchild) => x.id !== id);
+  form.value.columns = form.value.columns.filter((x: Column) => x.id !== id);
 };
 
 const onSubmit = async () => {
@@ -101,8 +101,8 @@ onUpdated(() => {
               v-for="col in form.columns"
               :key="col.id"
               :child="col"
-              @updateColumn="updateColumn"
-              @removeColumn="removeColumn"
+              @updateChild="updateColumn"
+              @removeChild="removeColumn"
             />
           </div>
 

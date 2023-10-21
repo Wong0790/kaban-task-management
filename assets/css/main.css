@@ -87,7 +87,7 @@
 }
 
 .menu-wrapper {
-  @apply dark:bg-dark-grey rounded-xl pb-4;
+  @apply dark:bg-dark-grey rounded-xl;
 }
 
 .modes-wrapper-outside {
@@ -151,5 +151,21 @@
 }
 
 .column-task-card {
-  @apply w-full bg-white rounded-lg dark:bg-dark-grey;
+  @apply w-full bg-white rounded-lg dark:bg-dark-grey cursor-pointer;
+}
+
+.view-task-title {
+  @apply flex items-center justify-between pb-0;
+}
+
+.view-task-title > h2 {
+  @apply leading-normal;
+}
+
+.completed-task-wrapper {
+  @apply flex items-center px-3 bg-light-grey rounded-md mb-2 dark:bg-very-dark-grey py-2;
+}
+
+.test {
+  @apply text-black dark:text-white;
 }

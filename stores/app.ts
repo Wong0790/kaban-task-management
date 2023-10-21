@@ -1,5 +1,4 @@
-import { LazyQSlideItem } from "#build/components";
-import { Board, Task } from "@/types/app";
+import { Board, Task, Column, Subtask } from "@/types/app";
 
 export const useAppStore = defineStore("app", () => {
   const colorMode = useColorMode();
@@ -7,9 +6,13 @@ export const useAppStore = defineStore("app", () => {
 
   const boardDialog = ref<boolean>(false);
   const editBoardDialog = ref<boolean>(false);
+  const deleteBoard = ref<boolean>(false);
 
   const taskDialog = ref<boolean>(false);
   const editTaskDialog = ref<boolean>(false);
+  const viewTaskDialog = ref<boolean>(false);
+  const selectedTask = ref<Task | undefined>(undefined);
+  const deleteTask = ref<boolean>(false);
 
   const boards = ref<Board[]>([]);
 
@@ -28,7 +31,9 @@ export const useAppStore = defineStore("app", () => {
   }
 
   function updateBoard(item: Board) {
-    const index = boards.value.findIndex((board) => board.id === item.id);
+    const index = boards.value.findIndex(
+      (board: Board) => board.id === item.id
+    );
     item.columns = item.columns.filter((column) => column.name !== "");
     boards.value[index] = item;
   }
@@ -45,9 +50,35 @@ export const useAppStore = defineStore("app", () => {
       (x: Board) => x.id === activeMenu.value?.id
     );
     if (index !== -1) {
+      item.subtasks = item.subtasks.filter(
+        (subtask: Subtask) => subtask.name !== ""
+      );
       item.id = boards.value[index].tasks.length + 1;
       boards.value[index].tasks.push(item);
     }
+  }
+
+  function updateTask(item: Task) {
+    const boardIndex = boards.value.findIndex(
+      (board: Board) => board.id === item.boardId
+    );
+    const taskIndex = boards.value[boardIndex].tasks.findIndex(
+      (task: Task) => task.id === item.id
+    );
+    item.subtasks = item.subtasks.filter(
+      (subtask: Subtask) => subtask.name !== ""
+    );
+    boards.value[boardIndex].tasks[taskIndex] = item;
+  }
+
+  function removeTask() {
+    const boardIndex = boards.value.findIndex(
+      (board: Board) => board.id === selectedTask.value?.boardId
+    );
+    const taskIndex = boards.value[boardIndex].tasks.findIndex(
+      (task: Task) => task.id === selectedTask.value?.id
+    );
+    boards.value[boardIndex].tasks.splice(taskIndex, 1);
   }
 
   return {
@@ -55,8 +86,12 @@ export const useAppStore = defineStore("app", () => {
     theme,
     boardDialog,
     editBoardDialog,
+    deleteBoard,
     taskDialog,
     editTaskDialog,
+    viewTaskDialog,
+    selectedTask,
+    deleteTask,
     boards,
     activeMenu,
     onClick,
@@ -64,5 +99,7 @@ export const useAppStore = defineStore("app", () => {
     updateBoard,
     removeBoard,
     addTask,
+    updateTask,
+    removeTask,
   };
 });

@@ -19,5 +19,8 @@ const store = useAppStore();
     </q-scroll-area>
     <DialogBoard />
     <DialogTask />
+    <DialogViewTask />
+    <DialogDeleteBoard />
+    <DialogDeleteTask />
   </div>
 </template>

@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { Task, Subchild } from "@/types/app";
+import { Task, Subtask } from "@/types/app";
 import { useAppStore } from "@/stores/app";
 import { useVuelidate } from "@vuelidate/core";
 import { required } from "@vuelidate/validators";
@@ -10,6 +10,7 @@ const form = ref<Task>({
   title: "",
   description: "",
   subtasks: [],
+  boardId: store.activeMenu?.id,
   columnId: 0,
 });
 
@@ -23,24 +24,25 @@ const addSubtask = () => {
   form.value.subtasks.push({
     id: form.value.subtasks.length,
     name: "",
+    completed: false,
   });
 };
 
 const updateSubtask = (id: number, column: string) => {
-  const index = form.value.subtasks.findIndex((x: Subchild) => x.id === id);
+  const index = form.value.subtasks.findIndex((x: Subtask) => x.id === id);
   form.value.subtasks[index].name = column;
 };
 
 const removeSubtask = (id: number) => {
-  form.value.subtasks = form.value.subtasks.filter(
-    (x: Subchild) => x.id !== id
-  );
+  form.value.subtasks = form.value.subtasks.filter((x: Subtask) => x.id !== id);
 };
 
 const onSubmit = async () => {
   if (await v$.value.$validate()) {
     if (form.value.id === undefined) {
       store.addTask({ ...form.value });
+    } else {
+      store.updateTask({ ...form.value });
     }
     store.taskDialog = false;
     onReset();
@@ -53,8 +55,18 @@ const onReset = () => {
   form.value.title = "";
   form.value.description = "";
   form.value.subtasks = [];
+  form.value.boardId = store.activeMenu?.id;
   form.value.columnId = store.activeMenu?.columns[0].id;
 };
+
+onUpdated(() => {
+  if (store.editTaskDialog && store.selectedTask) {
+    form.value = { ...store.selectedTask };
+    store.editTaskDialog = false;
+  } else if (!store.editTaskDialog) {
+    onReset();
+  }
+});
 </script>
 
 <template>
@@ -102,8 +114,8 @@ recharge the batteries a little."
               v-for="subtask in form.subtasks"
               :key="subtask.id"
               :child="subtask"
-              @updateColumn="updateSubtask"
-              @removeColumn="removeSubtask"
+              @updateChild="updateSubtask"
+              @removeChild="removeSubtask"
             />
             <q-btn
               unelevated
@@ -121,6 +133,7 @@ recharge the batteries a little."
               outlined
               dense
               v-model="form.columnId"
+              :dark="store.colorMode.preference === 'dark'"
               :options="store.activeMenu?.columns"
               option-value="id"
               option-label="name"
