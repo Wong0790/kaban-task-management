@@ -88,7 +88,7 @@ onUpdated(() => {
               hide-bottom-space
               placeholder="e.g. Web Design"
               error-message="Field required"
-              :dark="store.colorMode.preference === 'dark'"
+              :dark="store.isDark"
               @input="v$.title.$touch"
               @blur="v$.title.$touch"
               ref="boardRef"

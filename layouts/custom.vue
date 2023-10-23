@@ -1,14 +1,17 @@
 <script lang="ts" setup>
 import { useAppStore } from "@/stores/app";
-import { IconLogoDark, IconLogoLight } from "#components";
 
 const $q = useQuasar();
-const leftDrawerOpen = ref(true);
+const leftDrawerOpen = ref(false);
 const store = useAppStore();
 
 const toggleLeftDrawer = () => {
   leftDrawerOpen.value = !leftDrawerOpen.value;
 };
+
+onMounted(() => {
+  store.changeColorMode();
+});
 </script>
 
 <template>
@@ -19,9 +22,7 @@ const toggleLeftDrawer = () => {
           class="header-logo-wrapper"
           :class="leftDrawerOpen ? 'hidden' : 'flex'"
         >
-          <component
-            :is="store.theme === 'light' ? IconLogoDark : IconLogoLight"
-          ></component>
+          <IconLogo :color="store.isDark ? '#FFF' : '#000112'" />
         </div>
 
         <q-toolbar-title>
@@ -48,14 +49,12 @@ const toggleLeftDrawer = () => {
       show-if-above
       v-model="leftDrawerOpen"
       side="left"
-      :bordered="store.theme === 'light'"
+      :bordered="!store.isDark"
       class="dark:bg-dark-grey"
     >
       <q-item v-ripple class="h-24">
         <q-item-section avatar>
-          <component
-            :is="store.theme === 'light' ? IconLogoDark : IconLogoLight"
-          ></component>
+          <IconLogo :color="store.isDark ? '#FFF' : '#000112'" />
         </q-item-section>
       </q-item>
       <LayoutDrawer @toggleLeftDrawer="toggleLeftDrawer" />

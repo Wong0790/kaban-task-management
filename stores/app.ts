@@ -1,8 +1,15 @@
 import { Board, Task, Column, Subtask } from "@/types/app";
 
 export const useAppStore = defineStore("app", () => {
+  const isDark = useDark({
+    selector: "body",
+    attribute: "color-scheme",
+    valueDark: "dark",
+    valueLight: "light",
+  });
+  const toggleDark = useToggle(isDark);
   const colorMode = useColorMode();
-  const theme = ref<string>(colorMode.preference);
+  const theme = ref(isDark.value ? "dark" : "light");
 
   const boardDialog = ref<boolean>(false);
   const editBoardDialog = ref<boolean>(false);
@@ -20,9 +27,10 @@ export const useAppStore = defineStore("app", () => {
     boards.value.find((board) => board.active)
   );
 
-  function onClick() {
-    return (colorMode.preference = theme.value === "light" ? "light" : "dark");
-  }
+  const changeColorMode = () => {
+    colorMode.preference = isDark.value ? "dark" : "light";
+    theme.value = colorMode.preference;
+  };
 
   function addBoard(item: Board) {
     item.id = boards.value.length + 1;
@@ -82,8 +90,10 @@ export const useAppStore = defineStore("app", () => {
   }
 
   return {
-    colorMode,
+    isDark,
+    toggleDark,
     theme,
+    colorMode,
     boardDialog,
     editBoardDialog,
     deleteBoard,
@@ -94,7 +104,7 @@ export const useAppStore = defineStore("app", () => {
     deleteTask,
     boards,
     activeMenu,
-    onClick,
+    changeColorMode,
     addBoard,
     updateBoard,
     removeBoard,

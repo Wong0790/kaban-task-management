@@ -42,7 +42,7 @@ const completedTotal = computed(
             outlined
             dense
             v-model="store.selectedTask.columnId"
-            :dark="store.theme === 'dark'"
+            :dark="store.isDark"
             :options="store.activeMenu?.columns"
             option-value="id"
             option-label="name"

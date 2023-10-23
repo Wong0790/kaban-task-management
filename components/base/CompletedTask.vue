@@ -14,11 +14,7 @@ const store = useAppStore();
     class="completed-task-wrapper"
     :class="subtask.completed ? 'line-through' : ''"
   >
-    <q-checkbox
-      v-model="subtask.completed"
-      size="xs"
-      :dark="store.theme === 'dark'"
-    />
+    <q-checkbox v-model="subtask.completed" size="xs" :dark="store.isDark" />
     <p style="max-width: 27rem" :class="!subtask.completed ? 'test' : ''">
       {{ subtask.name }}
     </p>

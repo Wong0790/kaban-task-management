@@ -23,7 +23,7 @@ onMounted(() => {
     <q-input
       outlined
       dense
-      :dark="store.colorMode.preference === 'dark'"
+      :dark="store.isDark"
       v-model="col"
       placeholder="e.g. Todo"
       class="w-10/12 sm:w-11/12"

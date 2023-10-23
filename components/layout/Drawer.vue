@@ -26,7 +26,7 @@ const createNewBoard = () => {
 </script>
 
 <template>
-  <div class="drawer-menu">
+  <div class="drawer-menu pb-4">
     <div>
       <h4 class="all-boards">All boards ({{ allBoards }})</h4>
       <q-list padding class="menu-list">
@@ -60,7 +60,10 @@ const createNewBoard = () => {
             v-model="store.theme"
             true-value="dark"
             false-value="light"
-            @click="store.onClick"
+            @click="
+              store.toggleDark();
+              store.changeColorMode();
+            "
           ></q-toggle>
           <IconDarkTheme />
         </div>

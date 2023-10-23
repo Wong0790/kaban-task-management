@@ -89,7 +89,7 @@ onUpdated(() => {
               hide-bottom-space
               placeholder="e.g. Take coffee break"
               error-message="Field required"
-              :dark="store.colorMode.preference === 'dark'"
+              :dark="store.isDark"
               @input="v$.title.$touch"
               @blur="v$.title.$touch"
             />
@@ -104,7 +104,7 @@ onUpdated(() => {
               hide-bottom-space
               placeholder="e.g. It’s always good to take a break. This 15 minute break will 
 recharge the batteries a little."
-              :dark="store.colorMode.preference === 'dark'"
+              :dark="store.isDark"
             />
           </div>
 
@@ -133,7 +133,7 @@ recharge the batteries a little."
               outlined
               dense
               v-model="form.columnId"
-              :dark="store.colorMode.preference === 'dark'"
+              :dark="store.isDark"
               :options="store.activeMenu?.columns"
               option-value="id"
               option-label="name"
