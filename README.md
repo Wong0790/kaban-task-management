@@ -40,7 +40,7 @@ Users should be able to:
 ### Links
 
 - Solution URL: [Add solution URL here](https://github.com/Wong0790/kaban-task-management)
-- Live Site URL: [Add live site URL here](https://app.netlify.com/sites/wong0790-kaban-task-management/overview)
+- Live Site URL: [Add live site URL here](https://wong0790-kaban-task-management.netlify.app)
 
 ### Built with
 
