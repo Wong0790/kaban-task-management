@@ -7,7 +7,6 @@ const open = ref(false);
     <q-btn
       flat
       padding="16px 0"
-      label="Platform Launch"
       no-caps
       class="platform-btn-header"
       @click="open = !open"
