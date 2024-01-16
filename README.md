@@ -39,8 +39,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://github.com/Wong0790/kaban-task-management)
-- Live Site URL: [Add live site URL here](https://wong0790-kaban-task-management.netlify.app)
+- Solution URL: [kaban-task-management-code](https://github.com/Wong0790/kaban-task-management)
+- Live Site URL: [wong0790-kaban-task-management.netlify.app](https://wong0790-kaban-task-management.netlify.app)
 
 ### Built with
 
@@ -59,6 +59,7 @@ Users should be able to:
 - Website - [Anneris Eloisa Wong Jorge](https://www.your-site.com)
 - Frontend Mentor - [@Wong0790](https://www.frontendmentor.io/profile/Wong0790)
 - Linkedin - [Anneris Wong Jorge](https://www.linkedin.com/in/anneris-wong-jorge-257948104)
+- - Github - [Anneris Wong Jorge](https://github.com/Wong0790)
 
 ## essentials
 
